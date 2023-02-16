@@ -10,4 +10,20 @@ const create = async (req, res) => {
     return res.status(201).json(createdTask);
 };
 
-module.exports = { getAll, create };
+const deleteTask = async (req, res) => {
+    const deleted = await tasksService.deleteTask(req.params);  
+    if (deleted.message) {
+        return res.status(400).json(deleted);
+    }
+    return res.status(201).json(deleted);
+};
+
+const editTask = async (req, res) => {
+    const response = await tasksService.editTask(req.params, req.body);
+    // if (response.message) {
+    //     return res.status(400).json(response);
+    // }
+    return res.status(204).json(response);
+};
+
+module.exports = { getAll, create, deleteTask, editTask };
