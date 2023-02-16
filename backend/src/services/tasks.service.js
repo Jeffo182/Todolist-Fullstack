@@ -5,4 +5,9 @@ const getAll = async () => {
     return response;
 };
 
-module.exports = { getAll};
+const create = async (task) => {
+    const createdTask = await tasksModel.create(task);  
+    return {insertId: createdTask};
+};
+
+module.exports = { getAll, create };
